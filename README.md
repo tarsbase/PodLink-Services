@@ -16,10 +16,10 @@ npm start
 
 The endpoints are as follows:
 
-### GET /api/v1/status
+#### GET /api/v1/status
 Always sends status code 200 if the service is up and running
 
-### POST /api/v1/info
+#### POST /api/v1/info
 Request body:
 ```json
 {
