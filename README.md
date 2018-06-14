@@ -2,7 +2,7 @@
 
 Provides services to [PodLink](https://github.com/nathangathright/PodLink)
 
-# Getting started
+## Getting started
 - Install dependencies
 ```
 npm install
@@ -72,3 +72,6 @@ Response body (follows the format of https://github.com/akupila/node-podcast-par
     ]
 }
 ```
+
+## Dev Notes
+- Within VS Code, you can debug easily by setting breakpoints in the code and then running via the Debug menu in the side bar. The Launch Configuration DEBUG should work just fine. You may need to change to `DEBUG CONSOLE` if you want to see output when you are debugging in this way.
