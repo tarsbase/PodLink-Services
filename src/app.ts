@@ -33,7 +33,7 @@ app.post("/api/v1/info", (req, res) => {
   })
 })
 
-app.post("/api/v1/links", (req, res) => {
+app.post("/api/v1/links", async (req, res) => {
   const iTunesID = req.body['iTunesID']
   if (iTunesID == null) {
     sendErrorBody('iTunesID is required', res)
@@ -41,16 +41,7 @@ app.post("/api/v1/links", (req, res) => {
   }
   console.log(`Fetching links for ${iTunesID}`)
 
-  async function getFeed(id: string) {
-    try {
-      const itunesAPI = await axios.get(`https://itunes.apple.com/lookup?id=${id}`)
-      const iTunesData = itunesAPI.data
-      return iTunesData.results[0].feedUrl
-    } catch (e) {
-      console.error(e)
-    }
-  }
-  const podcastRssUrl = getFeed(iTunesID)
+  const podcastRssUrl = await getFeed(iTunesID)
 
   LinksUtil.links(podcastRssUrl, iTunesID).then((data) => {
     res.send(data)
@@ -59,6 +50,16 @@ app.post("/api/v1/links", (req, res) => {
     sendServerError(res)
   })
 })
+
+async function getFeed(id: string): Promise<string> {
+  try {
+    const itunesAPI = await axios.get(`https://itunes.apple.com/lookup?id=${id}`)
+    const iTunesData = itunesAPI.data
+    return iTunesData.results[0].feedUrl
+  } catch (e) {
+    console.error(e)
+  }
+}
 
 function sendErrorBody(message: string, res: Response) {
   const response = {
