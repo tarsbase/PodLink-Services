@@ -1,10 +1,10 @@
+import axios from 'axios'
 import bodyParser from "body-parser"
 import compression from "compression"
 import dotenv from "dotenv"
 import express, { Response } from "express"
-import { PodcastParser } from "./util/PodcastParser"
 import { LinksUtil } from "./util/LinksUtil"
-import axios from "axios";
+import { PodcastParser } from "./util/PodcastParser"
 
 dotenv.config()
 
@@ -41,14 +41,16 @@ app.post("/api/v1/links", (req, res) => {
   }
   console.log(`Fetching links for ${iTunesID}`)
 
-  async function getFeed() {
-    let itunesAPI = await axios.get(`https://itunes.apple.com/lookup?id=${iTunesID}`)
-    return {
-      podcastRssUrl: itunesAPI.data.results[0].feedUrl
+  async function getFeed(id: string) {
+    try {
+      const itunesAPI = await axios.get(`https://itunes.apple.com/lookup?id=${id}`)
+      const iTunesData = itunesAPI.data
+      return iTunesData.results[0].feedUrl
+    } catch (e) {
+      console.error(e)
     }
   }
-
-  const podcastRssUrl = getFeed()
+  const podcastRssUrl = getFeed(iTunesID)
 
   LinksUtil.links(podcastRssUrl, iTunesID).then((data) => {
     res.send(data)
