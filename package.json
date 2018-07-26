@@ -34,8 +34,8 @@
     "@types/lodash": "^4.14.91",
     "@types/node": "^9.4.6",
     "rimraf": "^2.6.2",
-    "ts-node": "^5.0.0",
-    "tslint": "^5.9.1",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.11.0",
     "typescript": "^2.7.2"
   },
   "engines": {

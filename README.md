@@ -73,5 +73,27 @@ Response body (follows the format of https://github.com/akupila/node-podcast-par
 }
 ```
 
+#### POST /api/v1/links
+Request body:
+```json
+{
+  "rssUrl": "https://rss.simplecast.com/podcasts/1684/rss",
+  "iTunesID": "968779958"
+}
+```
+Response body:
+```json
+{
+    "breaker": "https://www.breaker.audio/shows?feed_url=https%3A%2F%2Frss.simplecast.com%2Fpodcasts%2F1684%2Frss",
+    "castBox": "http://castbox.fm/vic/968779958",
+    "castro": "https://castro.fm/itunes/968779958",
+    "google": "https://www.google.com/podcasts?feed=aHR0cHM6Ly9yc3Muc2ltcGxlY2FzdC5jb20vcG9kY2FzdHMvMTY4NC9yc3M=",
+    "iTunes": "https://geo.itunes.apple.com/ca/podcast/feed/id968779958",
+    "overcast": "https://overcast.fm/itunes968779958",
+    "pocketCasts": "http://pca.st/itunes/968779958",
+    "radioPublic": "https://radiopublic.com/https%3A%2F%2Frss.simplecast.com%2Fpodcasts%2F1684%2Frss",
+    "rss": "https://rss.simplecast.com/podcasts/1684/rss"
+}
+```
 ## Dev Notes
 - Within VS Code, you can debug easily by setting breakpoints in the code and then running via the Debug menu in the side bar. The Launch Configuration DEBUG should work just fine. You may need to change to `DEBUG CONSOLE` if you want to see output when you are debugging in this way.
