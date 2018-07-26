@@ -97,3 +97,13 @@ Response body:
 ```
 ## Dev Notes
 - Within VS Code, you can debug easily by setting breakpoints in the code and then running via the Debug menu in the side bar. The Launch Configuration DEBUG should work just fine. You may need to change to `DEBUG CONSOLE` if you want to see output when you are debugging in this way.
+
+## Deploy to Heroku
+Do this once:
+```
+heroku git:remote -a podlink-backend
+```
+Do this each time you want to deploy:
+```
+git push heroku master
+```
