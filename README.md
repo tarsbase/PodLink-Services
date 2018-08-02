@@ -77,7 +77,6 @@ Response body (follows the format of https://github.com/akupila/node-podcast-par
 Request body:
 ```json
 {
-  "rssUrl": "https://rss.simplecast.com/podcasts/1684/rss",
   "iTunesID": "968779958"
 }
 ```
