@@ -1,5 +1,8 @@
 import axios from 'axios'
+import _ from 'lodash'
 const parsePodcast = require('node-podcast-parser')
+const parseString = require('xml2js').parseString
+const cheerio = require('cheerio')
 
 /**
  * Wraps the podcast parsing node module
@@ -23,7 +26,22 @@ class PodcastParser {
                     if (err) {
                         reject(err)
                     } else {
-                        resolve(data)
+                        parseString(xml, (error: any, result: any) => {
+                            try {
+                                let paymentLink: string = null
+                                const descriptionHtml = result.rss.channel[0].item[0].description[0]
+                                cheerio.load(descriptionHtml).root().find('a').each((index: any, element: any) => {
+                                    console.log(element)
+                                    if (!_.isNil(element.attribs.rel) && element.attribs.rel === "payment") {
+                                        paymentLink = element.attribs.href
+                                    }
+                                })
+                                data.paymentLink = paymentLink
+                            } catch (exception) {
+                                // we tried our best
+                            }
+                            resolve(data)
+                        })
                     }
                 })
             })
